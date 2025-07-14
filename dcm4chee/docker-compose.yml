@@ -6,7 +6,7 @@ services:
       options:
         max-size: "10m"
     ports:
-      - "389:389"
+      # - "389:389"
     env_file: docker-compose.env
     volumes:
       - ~/dcm4chee-arc/ldap:/var/lib/ldap
@@ -21,7 +21,7 @@ services:
       options:
         max-size: "10m"
     ports:
-      - "5432:5432"
+      - "5005:5432"
     env_file: docker-compose.env
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -37,14 +37,14 @@ services:
       options:
         max-size: "10m"
     ports:
-      - "8080:8080" # HTTP
-      - "8443:8443" # HTTPS
+      - "7101:8080" # HTTP
+      - "7200:8443" # HTTPS
       # - "9990:9990"
       # - "9993:9993"
-      - "11112:11112" # DICOM
-      - "2762:2762"   # DICOM secured
-      - "2575:2575"   # HL7
-      - "12575:12575" # HL7 secured
+      - "7300:11112" # DICOM
+      - "7400:2762"   # DICOM secured
+      - "7500:2575"   # HL7
+      - "7600:12575" # HL7 secured
     env_file: docker-compose.env
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
