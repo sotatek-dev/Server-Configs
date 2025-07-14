@@ -1,5 +1,6 @@
 services:
   ldap:
+    container_name: pacs_dcm4chee_ldap
     image: dcm4che/slapd-dcm4chee:2.6.3-29.0
     logging:
       driver: json-file
@@ -15,6 +16,7 @@ services:
       - dcm4chee_network
 
   db:
+    container_name: pacs_dcm4chee_db
     image: dcm4che/postgres-dcm4chee:14.5-29
     logging:
       driver: json-file
@@ -31,6 +33,7 @@ services:
       - dcm4chee_network
 
   arc:
+    container_name: pacs_dcm4chee_arc
     image: dcm4che/dcm4chee-arc-psql:5.29.0
     logging:
       driver: json-file
