@@ -1,0 +1,76 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+  filelog/traefik:
+    include: 
+      - /var/log/traefik/traefik.log
+    start_at: beginning
+    operators:
+      - type: json_parser
+        parse_from: body
+  filelog/access:
+    include: 
+      - /var/log/traefik/access.log
+    start_at: beginning
+    operators:
+      - type: json_parser
+        parse_from: body
+  filelog/wildfly:
+    include:
+      - /var/log/dcm4chee/wildfly/server.log
+    start_at: beginning
+    operators:
+    - type: move
+      from: body
+      to: body.message
+
+processors:
+  batch:
+  resource/traefik:
+    attributes:
+      - key: service.name
+        value: traefik
+        action: upsert
+      - key: log.type
+        value: internal
+        action: upsert
+  resource/access:
+    attributes:
+      - key: service.name
+        value: traefik
+        action: upsert
+      - key: log.type
+        value: access
+        action: upsert
+  resource/wildfly:
+    attributes:
+      - key: service.name
+        value: wildfly
+        action: upsert
+  attributes:
+    actions:
+      - key: loki.attribute.labels
+        value: service.name,log.type
+        action: upsert
+
+exporters:
+  loki:
+    endpoint: http://10.4.40.187:31000/loki/api/v1/push
+
+service:
+  pipelines:
+    logs/traefik:
+      receivers: [filelog/traefik]
+      processors: [batch, resource/traefik, attributes]
+      exporters: [loki]
+    logs/access:
+      receivers: [filelog/access]
+      processors: [batch, resource/access, attributes]
+      exporters: [loki]
+    logs/wildfly:
+      receivers: [filelog/wildfly]
+      processors: [batch, resource/wildfly, attributes]
+      exporters: [loki]
+

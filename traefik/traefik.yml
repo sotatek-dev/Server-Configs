@@ -1,0 +1,35 @@
+## STATIC CONFIGURATION
+api:
+  dashboard: true
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+  bolt:
+    address: ":7687"
+
+providers:
+  docker:
+    network: traefik_net
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+  file:
+    directory: "/config/"
+
+log:
+  level: DEBUG 
+  format: json
+  filePath: "/logs/traefik.log"
+  maxSize: 10
+  maxBackups: 10
+  compress: true
+
+accessLog:
+  filePath: "/logs/access.log"
+  bufferingSize: 100
+  format: json
+
+experimental:
+  otlpLogs: true

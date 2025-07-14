@@ -1,0 +1,28 @@
+services:
+  pacs.orthanc:
+    image: jodogne/orthanc-plugins:1.12.8
+    container_name: pacs_orthanc
+    restart: unless-stopped
+    ports:
+      - '6101:4242' # DICOM
+      - '7100:8042' # HTTP
+    networks:
+      - orthanc_net
+      - orthanc_db_net
+      - traefik_net
+    volumes:
+      - ./config:/etc/orthanc:ro
+    labels:
+      - "traefik.enable=true"
+      # HTTP
+      - "traefik.http.routers.orthanc.entrypoints=http"
+      - "traefik.http.routers.orthanc.rule=Host(`orthanc.sotamed.internal`)"
+      - "traefik.http.services.orthanc.loadbalancer.server.port=8042"
+
+networks:
+  orthanc_net:
+    external: true
+  orthanc_db_net:
+    external: true
+  traefik_net:
+    external: true

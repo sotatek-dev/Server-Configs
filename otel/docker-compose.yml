@@ -1,0 +1,12 @@
+services:
+  otel-collector:
+    container_name: otel_sotamed
+    image: otel/opentelemetry-collector-contrib:0.129.1
+    volumes:
+      - "./otel-collector-config.yml:/etc/otel-collector-config.yml"
+      - "../traefik/logs:/var/log/traefik"
+      - "../../client-setup/dcm4chee/data/dcm4chee-arc/wildfly/log:/var/log/dcm4chee-arc/wildfly"
+    command: [ "--config=/etc/otel-collector-config.yml" ]
+    ports:
+      - "4317:4317"  # gRPC
+      - "4318:4318"  # HTTP

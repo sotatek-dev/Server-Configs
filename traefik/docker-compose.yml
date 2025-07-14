@@ -1,0 +1,44 @@
+services:
+  traefik:
+    image: traefik:v3.4.3
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+      - "7687:7687"
+    labels:
+      - "traefik.enable=true"
+      # http
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.sotamed.internal`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=redirect-https@file"
+      # https
+      - "traefik.http.routers.traefik-https.entrypoints=https"
+      - "traefik.http.routers.traefik-https.tls=true"
+      #- "traefik.http.routers.traefik-https.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik-https.service=api@internal"
+      - "traefik.http.routers.traefik-https.rule=Host(`traefik.sotamed.internal`)"
+      - "traefik.http.routers.traefik-https.middlewares=traefik-auth"
+      # middleware
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
+    environment:
+      TRAEFIK_DASHBOARD_CREDENTIALS: ${TRAEFIK_DASHBOARD_CREDENTIALS}
+      TZ: Asia/Ho_Chi_Minh
+    command:
+      - --accesslog.fields.name.StartUTC=drop
+    volumes:
+      - "./traefik.yml:/traefik.yml:ro"
+      - "./traefik-dynamic.yml:/traefik-dynamic.yml:ro"
+      - "./config:/config"
+      - "./logs/:/logs/"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - traefik_net
+
+networks:
+  traefik_net:
+     external: true
+     name: $DEFAULT_NETWORK

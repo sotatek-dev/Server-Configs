@@ -1,0 +1,8 @@
+{
+  "PostgreSQL": {
+    "EnableIndex": true,
+    "EnableStorage": true,
+    "ConnectionUri": "postgresql://postgres:postgres@pacs_orthanc_db:5432/postgres"
+  }
+}
+
