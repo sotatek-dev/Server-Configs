@@ -5,8 +5,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
-    ports:
-      # - "389:389"
+    # ports:
+    #   - "389:389"
     env_file: docker-compose.env
     volumes:
       - ~/dcm4chee-arc/ldap:/var/lib/ldap
@@ -59,6 +59,15 @@ services:
       - ~/dcm4chee-arc/storage:/storage
     networks:
       - dcm4chee_network
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      # HTTP
+      - "traefik.http.routers.dcm4chee.entrypoints=http"
+      - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotamed.internal`)"
+      - "traefik.http.services.dcm4chee.loadbalancer.server.port=8080"
 
 networks:
   dcm4chee_network:
+  traefik_net:
+    external: true
