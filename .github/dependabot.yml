@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: "docker"
+    directory: "/" # Root is fine; it will detect Dockerfiles & compose
+    schedule:
+      interval: "daily"
+
+    # 👇 Enable grouping
+    groups:
+      nginx-updates:
+        patterns:
+          - "nginx*"
+      postgres-updates:
+        patterns:
+          - "postgres*"
+      node-updates:
+        patterns:
+          - "node*"
+
+    # Optional: commit message format
+    commit-message:
+      prefix: "chore"
+      include: "scope"
