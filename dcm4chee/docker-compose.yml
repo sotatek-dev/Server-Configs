@@ -1,7 +1,7 @@
 services:
   ldap:
     container_name: pacs_dcm4chee_ldap
-    image: dcm4che/slapd-dcm4chee:2.6.3-29.0
+    image: dcm4che/slapd-dcm4chee:2.6.8-34.0
     logging:
       driver: json-file
       options:
