@@ -11,7 +11,7 @@ services:
 
   loki:
     container_name: loki_sotamed
-    image: grafana/loki:3.5.1
+    image: grafana/loki:3.5.3
     ports:
       - "31000:3100"
     command: -config.file=/etc/loki/local-config.yaml
