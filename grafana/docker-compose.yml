@@ -1,7 +1,7 @@
 services:
   grafana:
     container_name: grafana_sotamed
-    image: grafana/grafana:12.0.2
+    image: grafana/grafana:12.1.0
     ports:
       - "30000:3000"
     environment:
