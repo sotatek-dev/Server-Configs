@@ -1,7 +1,7 @@
 services:
   keycloak:
-    image: sotamed-keycloak
     container_name: keycloak_sotamed
+    image: sotamed-keycloak:0.0.1
     ports:
       - "6102:8080"
       - "6103:8443"
