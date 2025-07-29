@@ -1,23 +1,17 @@
 version: 2
 updates:
   - package-ecosystem: "docker"
-    directory: "/" # Root is fine; it will detect Dockerfiles & compose
+    directories:
+      - "/jenkins"
+      - "/keycloak"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
-    # 👇 Enable grouping
-    groups:
-      nginx-updates:
-        patterns:
-          - "nginx*"
-      postgres-updates:
-        patterns:
-          - "postgres*"
-      node-updates:
-        patterns:
-          - "node*"
-
-    # Optional: commit message format
-    commit-message:
-      prefix: "chore"
-      include: "scope"
+  - package-ecosystem: "docker-compose"
+    directories:
+      - "/dcm4chee"
+      - "/grafana"
+      - "/otel"
+      - "/traefik"
+    schedule:
+      interval: "weekly"
