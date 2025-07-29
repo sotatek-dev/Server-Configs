@@ -15,3 +15,6 @@ updates:
       - "/traefik"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "dcm4che/slapd-dcm4chee"
+        versions: ["3.x", "4.x", "5.x"]
