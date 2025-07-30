@@ -18,16 +18,16 @@ services:
     labels:
       - "traefik.enable=true"
       # HTTP
-      - "traefik.http.routers.jenkins.rule=Host(`jenkins.sotamed.internal`)"
+      - "traefik.http.routers.jenkins.rule=Host(`jenkins.sotatek.works`)"
       - "traefik.http.routers.jenkins.entrypoints=http"
       - "traefik.http.routers.jenkins.middlewares=redirect-https@file"
       # HTTPS
-      - "traefik.http.routers.jenkins-https.rule=Host(`jenkins.sotamed.internal`)"
+      - "traefik.http.routers.jenkins-https.rule=Host(`jenkins.sotatek.works`)"
       - "traefik.http.routers.jenkins-https.entrypoints=https"
       - "traefik.http.routers.jenkins-https.tls=true"
       - "traefik.http.services.jenkins.loadbalancer.server.port=6101"
       # TCP
-      - "traefik.tcp.routers.jenkins.rule=HostSNI(`jenkins.sotamed.internal`)"
+      - "traefik.tcp.routers.jenkins.rule=HostSNI(`jenkins.sotatek.works`)"
       - "traefik.tcp.routers.jenkins.tls=true"
       - "traefik.tcp.services.jenkins.loadbalancer.server.port=50000"
 

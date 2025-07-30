@@ -67,7 +67,7 @@ services:
       - "traefik.enable=true"
       # HTTP
       - "traefik.http.routers.dcm4chee.entrypoints=http"
-      - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotamed.internal`)"
+      - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotatek.works`)"
       - "traefik.http.services.dcm4chee.loadbalancer.server.port=8080"
 
 networks:

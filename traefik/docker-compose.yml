@@ -12,7 +12,7 @@ services:
       - "traefik.enable=true"
       # http
       - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.sotamed.internal`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.sotatek.works`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=redirect-https@file"
       # https
@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.traefik-https.tls=true"
       #- "traefik.http.routers.traefik-https.tls.certresolver=myresolver"
       - "traefik.http.routers.traefik-https.service=api@internal"
-      - "traefik.http.routers.traefik-https.rule=Host(`traefik.sotamed.internal`)"
+      - "traefik.http.routers.traefik-https.rule=Host(`traefik.sotatek.works`)"
       - "traefik.http.routers.traefik-https.middlewares=traefik-auth"
       # middleware
       - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"

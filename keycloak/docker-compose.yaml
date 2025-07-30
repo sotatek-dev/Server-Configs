@@ -3,8 +3,8 @@ services:
     container_name: keycloak_sotamed
     image: sotamed-keycloak:0.0.1
     ports:
-      - "6102:8080"
-      - "6103:8443"
+      # - "6102:8080"
+      - "6102:8443"
       - "6500:9000"
     environment:
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
@@ -15,15 +15,15 @@ services:
       - KC_DB_PASSWORD=keycloak
       - KC_HTTP_ENABLED=true
       - PROXY_ADDRESS_FORWARDING=true
-      - KEYCLOAK_FRONTEND_URL=https://keycloak.sotamed.internal
+      - KEYCLOAK_FRONTEND_URL=https://keycloak.sotatek.works
       - KC_PROXY=edge
       - KC_HOSTNAME_STRICT=false
       - KC_HOSTNAME_STRICT_HTTPS=false
       - KC_HOSTNAME_STRICT_BACKCHANNEL=false
-      - KC_HOSTNAME_ADMIN_URL=https://keycloak.sotamed.internal
-        #- KC_HTTPS_CERTIFICATE_FILE=/certs/wildcard.sotamed.internal.crt
-        #- KC_HTTPS_CERTIFICATE_KEY_FILE=/certs/wildcard.sotamed.internal.key
-    command: start --optimized --hostname=keycloak.sotamed.internal --proxy-headers=xforwarded
+      - KC_HOSTNAME_ADMIN_URL=https://keycloak.sotatek.works
+        #- KC_HTTPS_CERTIFICATE_FILE=/certs/wildcard.sotatek.works.crt
+        #- KC_HTTPS_CERTIFICATE_KEY_FILE=/certs/wildcard.sotatek.works.key
+    command: start --optimized --hostname=keycloak.sotatek.works --proxy-headers=xforwarded
     networks:
       - db_net
       - traefik_net
@@ -33,11 +33,11 @@ services:
       - "traefik.enable=true"
       # HTTP
       - "traefik.http.routers.keycloak.entrypoints=http"
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.sotamed.internal`)"
+      - "traefik.http.routers.keycloak.rule=Host(`keycloak.sotatek.works`)"
       - "traefik.http.routers.keycloak.middlewares=redirect-https@file"
       # HTTPS
       - "traefik.http.routers.keycloak-https.entrypoints=https"
-      - "traefik.http.routers.keycloak-https.rule=Host(`keycloak.sotamed.internal`)"
+      - "traefik.http.routers.keycloak-https.rule=Host(`keycloak.sotatek.works`)"
       - "traefik.http.routers.keycloak-https.tls=true"
       - "traefik.http.services.keycloak-https.loadbalancer.server.port=8080"
 
