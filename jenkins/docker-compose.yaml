@@ -8,7 +8,7 @@ services:
       - jenkins_net
       - traefik_net
     ports:
-      - "8081:8080"
+      - "6101:8080"
       - "50000:50000"
     volumes:
       - data:/var/jenkins_home
@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.jenkins-https.rule=Host(`jenkins.sotamed.internal`)"
       - "traefik.http.routers.jenkins-https.entrypoints=https"
       - "traefik.http.routers.jenkins-https.tls=true"
-      - "traefik.http.services.jenkins.loadbalancer.server.port=8080"
+      - "traefik.http.services.jenkins.loadbalancer.server.port=6101"
       # TCP
       - "traefik.tcp.routers.jenkins.rule=HostSNI(`jenkins.sotamed.internal`)"
       - "traefik.tcp.routers.jenkins.tls=true"
