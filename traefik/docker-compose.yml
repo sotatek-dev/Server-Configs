@@ -40,5 +40,5 @@ services:
 
 networks:
   traefik_net:
-     external: true
-     name: $DEFAULT_NETWORK
+    external: true
+    name: $DEFAULT_NETWORK
