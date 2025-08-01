@@ -26,20 +26,20 @@ services:
     command: start --optimized --hostname=keycloak.sotatek.works --proxy-headers=xforwarded
     networks:
       - db_net
-      - traefik_net
+      # - traefik_net
     volumes:
       - ./certs:/certs
-    labels:
-      - "traefik.enable=true"
-      # HTTP
-      - "traefik.http.routers.keycloak.entrypoints=http"
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.sotatek.works`)"
-      - "traefik.http.routers.keycloak.middlewares=redirect-https@file"
-      # HTTPS
-      - "traefik.http.routers.keycloak-https.entrypoints=https"
-      - "traefik.http.routers.keycloak-https.rule=Host(`keycloak.sotatek.works`)"
-      - "traefik.http.routers.keycloak-https.tls=true"
-      - "traefik.http.services.keycloak-https.loadbalancer.server.port=8080"
+    # labels:
+    #   - "traefik.enable=true"
+    #   # HTTP
+    #   - "traefik.http.routers.keycloak.entrypoints=http"
+    #   - "traefik.http.routers.keycloak.rule=Host(`keycloak.sotatek.works`)"
+    #   - "traefik.http.routers.keycloak.middlewares=redirect-https@file"
+    #   # HTTPS
+    #   - "traefik.http.routers.keycloak-https.entrypoints=https"
+    #   - "traefik.http.routers.keycloak-https.rule=Host(`keycloak.sotatek.works`)"
+    #   - "traefik.http.routers.keycloak-https.tls=true"
+    #   - "traefik.http.services.keycloak-https.loadbalancer.server.port=8080"
 
   db:
     image: postgres:17.5
@@ -67,5 +67,5 @@ volumes:
 
 networks:
   db_net:
-  traefik_net:
-    external: true
+  # traefik_net:
+  #   external: true

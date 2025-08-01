@@ -62,13 +62,13 @@ services:
       - arc_storage_data:/storage
     networks:
       - dcm4chee_network
-      - traefik_net
-    labels:
-      - "traefik.enable=true"
-      # HTTP
-      - "traefik.http.routers.dcm4chee.entrypoints=http"
-      - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotatek.works`)"
-      - "traefik.http.services.dcm4chee.loadbalancer.server.port=8080"
+      # - traefik_net
+    # labels:
+    #   - "traefik.enable=true"
+    #   # HTTP
+    #   - "traefik.http.routers.dcm4chee.entrypoints=http"
+    #   - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotatek.works`)"
+    #   - "traefik.http.services.dcm4chee.loadbalancer.server.port=8080"
 
 volumes:
   ldap_data:
@@ -79,5 +79,6 @@ volumes:
 
 networks:
   dcm4chee_network:
-  traefik_net:
-    external: true
+    name: dcm4chee_network
+  # traefik_net:
+  #   external: true
