@@ -2,7 +2,9 @@ services:
   jenkins:
     container_name: jenkins-blueocean
     image: sotamed-jenkins:0.0.5
-    restart: on-failure
+    build:
+      context: .
+    restart: unless-stopped
     user: root
     networks:
       - jenkins_net
