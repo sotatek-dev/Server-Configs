@@ -6,9 +6,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
-    # ports:
-    #   - "389:389"
-    env_file: docker-compose.env
+    environment:
+      STORAGE_DIR: /storage/fs1
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_slapd_data:/etc/ldap/slapd.d
@@ -24,7 +23,10 @@ services:
         max-size: "10m"
     ports:
       - "5005:5432"
-    env_file: docker-compose.env
+    environment:
+      POSTGRES_DB: pacsdb
+      POSTGRES_USER: pacs
+      POSTGRES_PASSWORD: pacs
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
@@ -48,10 +50,12 @@ services:
       - "7400:2762" # DICOM secured
       - "7500:2575" # HL7
       - "7600:12575" # HL7 secured
-    env_file: docker-compose.env
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432
+      POSTGRES_DB: pacsdb
+      POSTGRES_USER: pacs
+      POSTGRES_PASSWORD: pacs
     depends_on:
       - ldap
       - db
