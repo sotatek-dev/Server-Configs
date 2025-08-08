@@ -31,6 +31,7 @@ services:
     command: start --optimized --hostname=keycloak.sotatek.works --proxy-headers=xforwarded
     networks:
       - db_net
+      - keycloak_net
       # - traefik_net
     volumes:
       - ./certs:/certs
@@ -72,5 +73,7 @@ volumes:
 
 networks:
   db_net:
+  keycloak_net:
+    name: keycloak_net
   # traefik_net:
   #   external: true

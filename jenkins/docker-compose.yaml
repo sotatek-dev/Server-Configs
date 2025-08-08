@@ -8,7 +8,6 @@ services:
     user: root
     networks:
       - jenkins_net
-      # - traefik_net
     ports:
       - "6101:8080"
       - "50000:50000"
@@ -16,21 +15,6 @@ services:
       - data:/var/jenkins_home
       - /tmp/jenkins:/tmp/jenkins
       - /var/run/docker.sock:/var/run/docker.sock
-    # labels:
-    #   - "traefik.enable=true"
-    #   # HTTP
-    #   - "traefik.http.routers.jenkins.rule=Host(`jenkins.sotatek.works`)"
-    #   - "traefik.http.routers.jenkins.entrypoints=http"
-    #   - "traefik.http.routers.jenkins.middlewares=redirect-https@file"
-    #   # HTTPS
-    #   - "traefik.http.routers.jenkins-https.rule=Host(`jenkins.sotatek.works`)"
-    #   - "traefik.http.routers.jenkins-https.entrypoints=https"
-    #   - "traefik.http.routers.jenkins-https.tls=true"
-    #   - "traefik.http.services.jenkins.loadbalancer.server.port=6101"
-    #   # TCP
-    #   - "traefik.tcp.routers.jenkins.rule=HostSNI(`jenkins.sotatek.works`)"
-    #   - "traefik.tcp.routers.jenkins.tls=true"
-    #   - "traefik.tcp.services.jenkins.loadbalancer.server.port=50000"
 
 volumes:
   data:
@@ -38,5 +22,3 @@ volumes:
 networks:
   jenkins_net:
     external: true
-  # traefik_net:
-  #   external: true

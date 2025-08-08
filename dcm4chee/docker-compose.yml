@@ -1,11 +1,13 @@
 services:
   ldap:
     container_name: pacs_dcm4chee_ldap
-    image: dcm4che/slapd-dcm4chee:2.6.8-34.0
+    image: dcm4che/slapd-dcm4chee:2.6.6-32.1
     logging:
       driver: json-file
       options:
         max-size: "10m"
+    # ports:
+    #   - "389:389"
     environment:
       STORAGE_DIR: /storage/fs1
     volumes:
@@ -16,7 +18,7 @@ services:
 
   db:
     container_name: pacs_dcm4chee_db
-    image: dcm4che/postgres-dcm4chee:17.4-34
+    image: dcm4che/postgres-dcm4chee:16.2-32
     logging:
       driver: json-file
       options:
@@ -36,7 +38,7 @@ services:
 
   arc:
     container_name: pacs_dcm4chee_arc
-    image: dcm4che/dcm4chee-arc-psql:5.34.0
+    image: dcm4che/dcm4chee-arc-psql:5.32.1
     logging:
       driver: json-file
       options:
@@ -66,13 +68,6 @@ services:
       - arc_storage_data:/storage
     networks:
       - dcm4chee_network
-      # - traefik_net
-    # labels:
-    #   - "traefik.enable=true"
-    #   # HTTP
-    #   - "traefik.http.routers.dcm4chee.entrypoints=http"
-    #   - "traefik.http.routers.dcm4chee.rule=Host(`dcm4chee.sotatek.works`)"
-    #   - "traefik.http.services.dcm4chee.loadbalancer.server.port=8080"
 
 volumes:
   ldap_data:
