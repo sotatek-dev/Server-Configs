@@ -18,7 +18,7 @@ services:
 
   db:
     container_name: pacs_dcm4chee_db
-    image: dcm4che/postgres-dcm4chee:16.2-32
+    image: dcm4che/postgres-dcm4chee:17.4-34
     logging:
       driver: json-file
       options:
