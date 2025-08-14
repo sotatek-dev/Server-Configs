@@ -1,0 +1,16 @@
+services:
+  agent-1:
+    container_name: teamcity_agent
+    image: jetbrains/teamcity-agent:2025.07-linux
+    restart: unless-stopped
+    networks:
+      - teamcity_net
+    volumes:
+      - ./conf:/data/teamcity_agent/conf
+
+volumes:
+  data:
+
+networks:
+  teamcity_net:
+    external: true
