@@ -1,12 +1,18 @@
 services:
   agent-1:
     container_name: teamcity_agent
-    image: jetbrains/teamcity-agent:2025.07-linux
+    image: teamcity-agent:0.0.1
+    build:
+      context: .
     restart: unless-stopped
+    user: root
+    environment:
+      SERVER_URL: http://10.4.40.187:6100
     networks:
       - teamcity_net
     volumes:
       - ./conf:/data/teamcity_agent/conf
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   data:
