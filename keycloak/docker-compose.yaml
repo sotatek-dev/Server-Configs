@@ -21,7 +21,9 @@ services:
       - KC_HTTP_ENABLED=true
       - KC_HOSTNAME_STRICT=false
       - KC_PROXY_HEADERS=xforwarded
-    command: start --optimized --hostname=https://keycloak.sotatek.works
+    volumes:
+      - ./realms:/opt/keycloak/data/import
+    command: start --hostname=https://keycloak.sotatek.works --optimized --import-realm
     networks:
       - db_net
       - keycloak_net
