@@ -1,0 +1,23 @@
+services:
+  minio:
+    container_name: minio
+    image: minio/minio
+    restart: always
+    ports:
+      - "6000:9000"
+      - "6501:9001"
+    environment:
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "123@1234"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - minio_net
+
+volumes:
+  minio_data:
+
+networks:
+  minio_net:
+    name: minio_net
