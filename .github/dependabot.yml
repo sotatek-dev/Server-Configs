@@ -11,6 +11,7 @@ updates:
     directories:
       - "/dcm4chee"
       - "/grafana"
+      - "/minio"
       - "/otel"
       - "/traefik"
     schedule:
@@ -18,3 +19,7 @@ updates:
     ignore:
       - dependency-name: "dcm4che/slapd-dcm4chee"
         versions: ["3.x.x", "4.x.x", "5.x.x"]
+      - dependency-name: "dcm4che/postgres-dcm4chee"
+        versions: ["17.x"]
+      - dependency-name: "dcm4che/dcm4chee-arc-psql"
+        versions: ["5.33.x", "5.34.x"]
