@@ -12,7 +12,7 @@ services:
       - "6101:8080"
       - "50000:50000"
     volumes:
-      - data:/var/jenkins_home
+      - ./jenkins_home:/var/jenkins_home
       - /tmp/jenkins:/tmp/jenkins
       - /var/run/docker.sock:/var/run/docker.sock
 
