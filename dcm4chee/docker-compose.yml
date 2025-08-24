@@ -38,7 +38,7 @@ services:
 
   arc:
     container_name: pacs_dcm4chee_arc
-    image: dcm4che/dcm4chee-arc-psql:5.32.1
+    image: dcm4che/dcm4chee-arc-psql:5.34.0
     logging:
       driver: json-file
       options:
