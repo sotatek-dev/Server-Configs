@@ -2,7 +2,9 @@
   "cSpell.words": [
     "dcm4chee",
     "DICOM",
+    "localtime",
+    "psql",
     "sotatek",
     "traefik"
-]
+  ]
 }
