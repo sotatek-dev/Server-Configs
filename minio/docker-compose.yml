@@ -15,6 +15,18 @@ services:
     networks:
       - minio_net
 
+  minio-setup:
+    image: minio/mc:latest
+    container_name: minio-setup
+    depends_on:
+      - minio
+    volumes:
+      - ./setup:/setup
+    entrypoint: [ "sh", "/setup/setup-minio.sh" ]
+    restart: "no"
+    networks:
+      - minio_net
+
 volumes:
   minio_data:
 
