@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 echo "Delay 15s waiting for MinIO to be ready..."
 sleep 15
