@@ -1,7 +1,7 @@
 services:
   keycloak:
     container_name: keycloak_sotamed
-    image: sotamed-keycloak:0.0.2
+    image: sotamed-keycloak:0.0.3
     build:
       context: .
     restart: unless-stopped
