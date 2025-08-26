@@ -23,6 +23,7 @@ services:
       - KC_PROXY_HEADERS=xforwarded
     volumes:
       - ./realms:/opt/keycloak/data/import
+      - ./themes:/opt/keycloak/providers/
     command: start --hostname=https://keycloak.sotatek.works --optimized --import-realm
     networks:
       - db_net
