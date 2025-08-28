@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.525-slim-jdk21
+FROM jenkins/jenkins:2.516.2-lts-slim
 USER root
 
 RUN apt-get update \
