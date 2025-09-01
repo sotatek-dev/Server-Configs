@@ -2,19 +2,33 @@ services:
   grafana:
     container_name: grafana_sotamed
     image: grafana/grafana:12.1.1
+    networks:
+      - grafana_net
     ports:
-      - "30000:3000"
+      - "6502:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./dashboards:/etc/grafana/dashboards
+      - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources
 
   loki:
     container_name: loki_sotamed
     image: grafana/loki:3.5.3
+    networks:
+      - grafana_net
+      - loki_net
     ports:
-      - "31000:3100"
+      - "6600:3100"
     command: -config.file=/etc/loki/local-config.yaml
 
 volumes:
   grafana-storage:
+
+networks:
+  grafana_net:
+    name: grafana_net
+  loki_net:
+    name: loki_net
