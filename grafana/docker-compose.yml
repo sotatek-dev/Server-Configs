@@ -24,8 +24,23 @@ services:
       - "6600:3100"
     command: -config.file=/etc/loki/local-config.yaml
 
+  tempo:
+    container_name: tempo_sotamed
+    image: grafana/tempo:2.8.2
+    networks:
+      - grafana_net
+    ports:
+      - "3200:3200"   # Tempo query API (optional for Grafana)
+      - "4317:4317"   # OTLP/gRPC
+      - "4318:4318"   # OTLP/HTTP
+    command: "-config.file=/etc/tempo/tempo.yaml"
+    volumes:
+      - ./tempo:/etc/tempo
+      - tempo-data:/tmp/tempo
+
 volumes:
   grafana-storage:
+  tempo-data:
 
 networks:
   grafana_net:
