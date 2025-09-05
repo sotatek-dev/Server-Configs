@@ -29,6 +29,7 @@ services:
     image: grafana/tempo:2.8.2
     networks:
       - grafana_net
+      - tempo_net
     ports:
       - "3200:3200"   # Tempo query API (optional for Grafana)
       - "4317:4317"   # OTLP/gRPC
@@ -47,3 +48,5 @@ networks:
     name: grafana_net
   loki_net:
     name: loki_net
+  tempo_net:
+    name: tempo_net
