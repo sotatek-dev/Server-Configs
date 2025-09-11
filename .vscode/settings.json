@@ -3,6 +3,7 @@
     "dcm4chee",
     "DICOM",
     "localtime",
+    "mockoon",
     "psql",
     "sotatek",
     "traefik"

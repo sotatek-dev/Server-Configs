@@ -4,7 +4,13 @@ services:
     container_name: mockoon
     ports:
       - "6700:3000"
+    networks:
+      - mockoon_net
     volumes:
-      - ./enviroments/mockapi.json:/data.json
+      - ./environments/mockapi.json:/data.json
     command: ["--data", "/data.json", "--port", "3000"]
     restart: unless-stopped
+
+networks:
+  mockoon_net:
+    name: mockoon_net
